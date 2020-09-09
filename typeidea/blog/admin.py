@@ -5,6 +5,7 @@ from django.urls import reverse
 from .adminforms import PostAdminForm
 from typeidea.custom_site import custom_site
 from typeidea.base_admin import BaseOwnerAdmin
+from django.contrib.admin.models import LogEntry
 # Register your models here.
 class PostInline(admin.TabularInline):
     fields = ('title','desc')
@@ -114,3 +115,7 @@ class PostAdmin(BaseOwnerAdmin):
             reverse('cus_admin:blog_post_change',args=(obj.id,))
         )
     operator.short_description = '操作'
+
+@admin.register(LogEntry,site=custom_site)
+class LogEntryAdmin(admin.ModelAdmin):
+    list_display = ('object_repr','object_id','action_flag','user','change_message')

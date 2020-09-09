@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}首页{% endblock %}-typeidea博客系统</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+  </head>
+  <body>
+      <header class="fixed-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-9">
+                    <nav class="nav">
+                        <a class="logo" href="/">Typeidea</a>
+                        <a class="index" href="/">首页</a>
+                        {% for cate in navs %}
+                        <a class="link" href="{% url 'category_list' cate.id %}">{{ cate.name }}</a>
+                        {% endfor %}
+                    </nav>
+                </div>
+                <div class="col-3">
+                    <div class="input-group search">
+                        <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-secondary" type="button">Go!</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </header>
+
+	<div class="container main">
+        <div class="row">
+            <div class="col-9 left-side">
+                <div class="inner">
+                {% block content %}
+                {% endblock %}
+                </div>
+            </div>
+            <div class="col-3 right-side">
+                <div class="inner">
+                {% for sidebar in sidebars %}
+                <div class="sidebar">
+                    <div class="sidebar-title">{{ sidebar.title }}</div>
+                    {{ sidebar.content_html }}
+                    <!--<div class="sidebar-content">
+                        {% if side.display_type == 1 %}
+                            {% autoescape off %}
+                            {{ side.content }}
+                            {% endautoescape %}
+                        {% elif side.display_type == 2 %}
+                        <ul>
+                        &lt;!&ndash;{% for post in recently_posts %}
+                        <li><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></li>
+                        {% endfor %}&ndash;&gt;
+                        </ul>
+                        {% elif side.display_type == 4 %}
+                        <ul>
+                            &lt;!&ndash;{% for comment in recently_comments %}
+                                <li>{{ comment.content }}</li>
+                            {% endfor %}&ndash;&gt;
+                        </ul>
+                        {% endif %}
+                    </div>-->
+                </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <hr/>
+            <nav class="nav category">
+                {% for cate in categories %}
+                <a href="{% url 'category_list' cate.id %}">{{ cate.name }}</a>
+                {% endfor %}
+            </nav>
+        </div>
+        <div class="container power">
+            <span class="text-muted">Power by Typeidea@the5fire</span>
+        </div>
+    </footer>
