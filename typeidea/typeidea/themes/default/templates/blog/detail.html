@@ -1,6 +1,10 @@
 {% extends "./base.html" %}
 {% load comment_block %}
-
+{% block extra_head %}
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/goolecode.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+{% endblock %}
 {% block content %}
 
 <nav aria-label="breadcrumb" role="navigation">
@@ -27,7 +31,9 @@
         </nav>
     </div>
     <article class="content">
-        {{ post.content }}
+        {% autoescape off %}
+        {{ post.content_html }}
+        {% endautoescape %}
     </article>
 </div>
 {% comment_block request.path %}
