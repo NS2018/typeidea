@@ -50,26 +50,34 @@
                 {% for sidebar in sidebars %}
                 <div class="sidebar">
                     <div class="sidebar-title">{{ sidebar.title }}</div>
-                    {{ sidebar.content_html }}
-                    <!--<div class="sidebar-content">
-                        {% if side.display_type == 1 %}
+<!--                    {{ sidebar.content_html }}-->
+                    <div class="sidebar-content">
+                        {% if sidebar.display_type == 1 %}
                             {% autoescape off %}
-                            {{ side.content }}
+                            {{ sidebar.content }}
                             {% endautoescape %}
-                        {% elif side.display_type == 2 %}
+                        {% elif sidebar.display_type == 2 %}
                         <ul>
-                        &lt;!&ndash;{% for post in recently_posts %}
+                        {% for post in sidebar.content_html %}
                         <li><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></li>
-                        {% endfor %}&ndash;&gt;
+                        {% endfor %}
                         </ul>
-                        {% elif side.display_type == 4 %}
+                        {% elif sidebar.display_type == 3 %}
                         <ul>
-                            &lt;!&ndash;{% for comment in recently_comments %}
+                        {% for post in sidebar.content_html %}
+                        <li><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></li>
+                        {% endfor %}
+                        </ul>
+                        {% elif sidebar.display_type == 4 %}
+                        <ul>
+                            {% for comment in sidebar.content_html %}
+                                {% autoescape off %}
                                 <li>{{ comment.content }}</li>
-                            {% endfor %}&ndash;&gt;
+                                {% endautoescape %}
+                            {% endfor %}
                         </ul>
                         {% endif %}
-                    </div>-->
+                    </div>
                 </div>
                 {% endfor %}
                 </div>
