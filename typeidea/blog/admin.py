@@ -16,7 +16,7 @@ class PostInline(admin.TabularInline):
 class CategoryAdmin(BaseOwnerAdmin):
     list_display = ('name','status','is_nav','created_time','post_count')
     fields = ('name','status','is_nav')
-    inlines = [PostInline,]
+    # inlines = [PostInline,]
 
     def save_model(self, request, obj, form, change):
         obj.owner = request.user
