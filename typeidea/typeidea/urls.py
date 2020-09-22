@@ -36,9 +36,10 @@ from blog.sitemap import PostSitemap
 
 # from blog.apis import post_list,PostList
 from rest_framework.routers import DefaultRouter
-from blog.apis import PostViewSet
+from blog.apis import PostViewSet,CategoryViewSet
 router = DefaultRouter()
 router.register(r'post',PostViewSet,base_name='api-post')
+router.register(r'category',CategoryViewSet,base_name='api-category')
 
 from rest_framework.documentation import include_docs_urls
 urlpatterns = [
